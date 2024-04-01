@@ -1,0 +1,61 @@
+First Missing Integer:
+
+Problem Description: Given an unsorted integer array, A of size N. Find the first missing positive integer.
+
+Solution: public class Solution {
+    public int firstMissingPositive(int[] A) {
+        int n=A.length;
+        int ele=0;
+        
+        // Step 1: Mark all negative numbers as out of range
+        for(int i=0;i<n;i++){
+            if(A[i]<0){
+                A[i]=n+2;
+            }
+        }
+        
+        // Step 2: Mark visited indices by making corresponding elements negative
+        for(int i=0;i<n;i++){
+            ele=Math.abs(A[i]);
+            if(ele>=1 && ele<=n){
+                if(A[ele-1]>0){
+                    A[ele-1]*=-1;
+                }
+            }
+        }
+        
+        // Step 3: Check the first positive missing integer
+        for(int i=0;i<n;i++){
+            if(A[i]>0){
+                return i+1;
+            }
+        }
+        
+        // If no positive missing integer found, return n+1
+        return n+1;
+    }
+}
+
+Explanation:
+
+1. The firstMissingPositive method takes an array A of integers as input and returns the first missing positive integer.
+
+2. It first determines the length of the input array n.
+
+3. In the first loop, it marks all negative numbers in the array as out of range by replacing them with n + 2.
+
+4. In the second loop, it iterates through the array, marking visited indices by making the corresponding elements negative. This is done by taking the absolute value of each element A[i], checking if it's within the range [1, n], and then making A[ele-1] negative.
+
+5. In the third loop, it checks for the first positive element in the array. If found, it returns its index + 1 (as the index is 0-based).
+
+6. If no positive missing integer is found in the array, it returns n + 1.
+
+>>Now, let's discuss the time and space complexity:
+
+(1)-Time Complexity:
+
+The algorithm consists of three loops, each iterating through the array once. Therefore, the time complexity is O(n), where n is the length of the input array.
+Space Complexity:
+
+(2)-The space complexity is O(1) because the algorithm uses a constant amount of extra space, regardless of the size of the input array. It does not use any additional data structures that grow with the size of the input.
+
