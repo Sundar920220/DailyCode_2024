@@ -1,0 +1,53 @@
+Max Sum Contiguous Subarray
+
+Problem Description: Find the maximum sum of contiguous non-empty subarray within an array A of length N.
+
+Solution : 
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int maxSubArray(final int[] A) {
+        int n = A.length;
+        int sum = 0;
+        int ans = Integer.MIN_VALUE;
+        
+        // Loop through the array to find the maximum subarray sum
+        for (int i = 0; i < n; i++) {
+            sum += A[i]; // Add the current element to the sum
+            
+            // Update the maximum sum if the current sum is greater
+            if (sum > ans) {
+                ans = sum;
+            }
+            
+            // Reset the sum to 0 if it becomes negative
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        
+        return ans; // Return the maximum subarray sum
+    }
+}
+
+Explanation:
+
+1. The maxSubArray method takes an array A of integers as input and returns the maximum sum of any contiguous subarray within the array.
+
+2. It initializes three variables: n to store the length of the input array, sum to keep track of the current sum of elements in a subarray, and ans to store the maximum subarray sum found so far.
+
+3. It iterates through the array A using a loop, adding each element to the sum.
+
+4. It updates the ans if the current sum (sum) is greater than the current maximum subarray sum (ans).
+
+5.  resets the sum to 0 if it becomes negative. This effectively "resets" the subarray, as starting from a negative sum will only decrease the overall sum of any future contiguous subarray.
+
+6. Finally, it returns the maximum subarray sum stored in ans.
+
+(1)-Time Complexity:
+
+The algorithm iterates through the array only once, making it O(n), where n is the length of the input array.
+
+(2)-Space Complexity:
+
+The algorithm uses a constant amount of extra space, regardless of the size of the input array. Therefore, the space complexity is O(1).
