@@ -1,0 +1,75 @@
+Maximum SubMatrix Sum
+
+Problem Description: Given a row-wise and column-wise sorted matrix A of size N * M.Return the maximum non-empty submatrix sum of this matrix.
+
+Solution : 
+
+public class Solution {
+    
+    /**
+     * This method finds the maximum sum subarray in a 2D array.
+     * 
+     * @param A The input 2D array.
+     * @return The maximum sum of a subarray.
+     */
+    public long solve(int[][] A) {
+        int n = A.length;
+        int m = A[0].length;
+        long ans = Long.MIN_VALUE;
+        
+        // Iterate through all possible starting points for the subarray
+        for(int start = 0; start < n; start++) {
+            long arr[] = new long[m];
+            
+            // Iterate through all possible ending points for the subarray
+            for(int end = start; end < n; end++) {
+                // Calculate cumulative sum of elements from start to end
+                for(int i = 0; i < m; i++) {
+                    arr[i] += A[end][i];
+                }
+                // Update the maximum sum using Kadane's algorithm
+                ans = Math.max(ans, kadanes(arr, m));
+            }
+        }
+        return ans;
+    }
+    
+    /**
+     * This method applies Kadane's algorithm to find the maximum sum subarray.
+     * 
+     * @param arr The input array.
+     * @param m   The length of the array.
+     * @return The maximum sum of a subarray.
+     */
+    public long kadanes(long arr[], int m) {
+        long sum = 0;
+        long maxSum = Integer.MIN_VALUE;
+        
+        // Iterate through the array to find the maximum sum subarray
+        for(int i = 0; i < m; i++) {
+            sum += arr[i];
+            if(sum > maxSum) 
+                maxSum = sum;
+            if(sum < 0) 
+                sum = 0;
+        }
+        return maxSum;
+    }
+}
+
+Explanation:
+ 
+ * Delving into an intriguing code snippet, we uncover a solution addressing a common challenge. Let's explore!
+
+ * This snippet ingeniously employs Kadane's algorithm to attain the maximum sum subarray within a 2D array.
+ * Here's a concise breakdown:
+ * - The 'solve' method exhaustively explores all possible subarrays, leveraging Kadane's algorithm for efficiency.
+ * - It iterates through all potential starting points and computes cumulative sums up to each ending point.
+ * - The 'kadanes' method applies Kadane's algorithm to find the maximum sum within a 1D array.
+
+ * Understanding such algorithmic techniques not only enhances programming skills but also fosters collaborative learning within the developer community. 
+ * Time and Space Complexity Analysis:
+ * Time Complexity: O(n^2 * m)
+ * Space Complexity: O(m)
+
+
