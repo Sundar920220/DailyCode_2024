@@ -1,0 +1,46 @@
+Daily Coding : Sum of all Submatrices
+
+Problem Description: Given a 2D Matrix A of dimensions N*N, we need to return the sum of all possible submatrices.
+
+Solution : 
+
+public class Solution {
+    // This method takes a 2D array A as input and returns an integer.
+    public int solve(int[][] A) {
+        // n represents the number of rows or columns in the square matrix A.
+        int n = A.length;
+        // Initialize ans variable to store the final answer.
+        int ans = 0;
+        // Iterate through each cell of the matrix.
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                // The formula computes the contribution of each cell to the final answer.
+                ans += (i + 1) * (j + 1) * (n - i) * (n - j) * A[i][j];
+            }
+        }
+        // Return the final answer.
+        return ans;
+    }
+}
+
+Explanation:
+
+1. The code defines a class named Solution.
+
+2. Within the class, there's a method named solve which takes a 2D array A as input and returns an integer.
+
+3.int n = A.length; calculates the number of rows or columns in the square matrix A. Since it's a square matrix, the number of rows is equal to the number of columns.
+int ans = 0; initializes the variable ans to store the final answer.
+
+4.Two nested loops iterate through each cell of the matrix using variables i and j.
+
+5.In each iteration, ans is updated by multiplying (i + 1), (j + 1), (n - i), (n - j), and the value of the current cell A[i][j]. These values represent the dimensions of the submatrices containing the current cell, and A[i][j] represents the value of the cell itself.
+
+6.Finally, the method returns the computed ans.
+
+Time Complexity:
+
+The time complexity of this algorithm is O(n^2), where n is the size of the input square matrix. This is because there are two nested loops iterating over the elements of the matrix.
+Space Complexity:
+
+The space complexity is O(1) because the algorithm only uses a constant amount of extra space, regardless of the size of the input matrix.
