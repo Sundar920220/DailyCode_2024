@@ -1,0 +1,67 @@
+Daily Coding: Search in a row-wise and Colum-wise Matrix
+
+Problem Description:  Given a matrix of integers A of size N x M and an integer B.
+In the given matrix every row and column is sorted in non-decreasing order. Find and return the position of B in the matrix in the given form:
+
+If A[i][j] = B then return (i * 1009 + j)
+If B is not present return -1.
+
+
+Solution : 
+
+public class Solution {
+    // Method to find the position of element B in a 2D matrix A
+    // Returns -1 if B is not found, otherwise returns the position in the format (i+1)*1009+(j+1)
+    public int solve(int[][] A, int B) {
+        // Initialize pointers i and j to traverse the matrix A
+        int i = 0, j = A[0].length - 1;
+        // Initialize ans to store the position of B, initially set to maximum integer value
+        int ans = Integer.MAX_VALUE;
+        // Traverse the matrix until either row index i exceeds the last row or column index j becomes negative
+        while (i < A.length && j >= 0) {
+            // If the current element is greater than B, move left in the current row
+            if (A[i][j] > B) {
+                j--;
+            }
+            // If the current element is less than B, move down to the next row
+            else if (A[i][j] < B) {
+                i++;
+            }
+            // If the current element is equal to B, update ans with the current position and move left in the current row
+            else {
+                ans = Math.min(ans, (i + 1) * 1009 + (j + 1));
+                j--;
+            }
+        }
+        // If ans remains Integer.MAX_VALUE, B is not found in the matrix, so return -1
+        if (ans == Integer.MAX_VALUE) {
+            return -1;
+        }
+        // Otherwise, return the position of B
+        else {
+            return ans;
+        }
+    }
+}
+
+Explanation:
+
+1. The code defines a class named Solution.
+2. Within the class, there's a method named solve which takes a 2D array A and an integer B as input and returns an integer.
+3. Two pointers i and j are initialized to traverse the matrix A. i starts from the first row (index 0) and j starts from the last column (index A[0].length - 1).
+4. ans is initialized to store the position of element B, initially set to maximum integer value.
+5. A while loop iterates until either i exceeds the last row index or j becomes negative.
+6. Inside the loop, three conditions are checked:
+7. If the current element is greater than B, move left in the current row by decrementing j.
+8. If the current element is less than B, move down to the next row by incrementing i.
+9. If the current element is equal to B, update ans with the current position and move left in the current row.
+10. Finally, if ans remains Integer.MAX_VALUE, it means B is not found in the matrix, so return -1. Otherwise, return the position of B.
+
+
+(1) Time Complexity:
+
+The time complexity of this algorithm is O(N + M), where N is the number of rows and M is the number of columns in the matrix A. This is because in the worst case scenario, the pointers i and j traverse the entire matrix once.
+
+(2) Space Complexity:
+
+The space complexity is O(1) because the algorithm only uses a constant amount of extra space, regardless of the size of the input matrix.
