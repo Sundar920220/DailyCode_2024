@@ -1,0 +1,48 @@
+Daily Coding:  Number of 1 Bits
+
+Problem Description: Write a function that takes an integer and returns the number of 1 bits present in its binary representation. 
+
+Solution : 
+
+public class Solution {
+    public int numSetBits(int A) {
+        int count=0; // Initialize a variable to count the number of set bits
+        
+        // Iterate through each bit position of the 32-bit integer A
+        for(int i=0;i<32;i++){
+            // Check if the i-th bit of A is set
+            if(((A>>i)&1)==1){ 
+                count++; // Increment count if the i-th bit is set
+            }
+        }
+        
+        return count; // Return the total count of set bits in the integer A
+    }
+}
+
+
+Explanation:
+
+(1) The class Solution contains a method named numSetBits, which takes a 32-bit integer A as its argument and returns an integer representing the number of set bits (bits with value 1) in A.
+(2) Inside the method, it initializes a variable count to 0, which will be used to count the number of set bits in A.
+(3) It iterates through each bit position (0 to 31) of the 32-bit integer A using a for loop.
+(4) Within the loop, it checks if the i-th bit of A is set using bitwise AND operation (A >> i & 1). If the result is 1, it means the i-th bit of A is set, and it increments the count variable.
+(5) After iterating through all 32 bit positions, the method returns the final count, which represents the total count of set bits in the integer A.
+
+
+(1) : Time Complexity:
+
+The time complexity of this solution is O(n), where n is the number of elements in the input array A.
+This is because the code iterates through each element of the array once in the inner loop, and it iterates through each bit position (32 times) in the outer loop.
+Therefore, the time complexity is linear in terms of the input size.
+
+(2): Space Complexity:
+
+The space complexity of this solution is O(1), which means it uses constant extra space.
+Regardless of the size of the input array, the amount of extra space used by the algorithm remains constant.
+The only variables used are n (which stores the length of the array), ans (which stores the result), i (loop variable), and count (to count the set bits), all of which are single integers.
+There are no data structures or arrays that grow with the input size, so the space complexity remains constant.
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
