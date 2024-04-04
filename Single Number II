@@ -1,0 +1,65 @@
+Daily Coding: Single Number II
+
+Problem Description:  Given an array of integers, every element appears thrice except for one, which occurs once.
+
+Solution : 
+
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int singleNumber(final int[] A) {
+        int n=A.length; // Stores the length of the input array A
+        int ans=0; // Initialize a variable to store the result
+        
+        // Iterate through each bit position (32 bits for integers)
+        for(int i=0;i<32;i++){
+            int count=0; // Initialize a counter for the number of set bits at the i-th position
+            
+            // Count the number of set bits at the i-th position in all elements of the array
+            for(int j=0;j<n;j++){
+                if(((A[j]>>i)&1)==1){ // Check if the i-th bit of A[j] is set
+                    count++; // Increment count if the i-th bit is set
+                }
+            }
+            
+            // If count modulo 3 is 1, then the single number has a set bit at the i-th position
+            if(count%3==1){
+                ans=ans|(1<<i); // Set the i-th bit of ans
+            }
+        }
+        
+        return ans; // Return the single number
+    }
+}
+
+
+Explanation:
+
+1. The class Solution contains amethod named singleNumber, which takes an array of integers A as its argument and returns an integer.
+2. The method is marked with final keyword, indicating that the argument A cannot be modified within the method.
+
+3. Inside the method, it first retrieves the length of the array A and stores it in the variable n.
+4. It initializes a variable ans to 0, which will be used to store the result.
+5. The code iterates through each bit position of a 32-bit integer (since integers are typically represented using 32 bits).
+6. Inside the outer loop, there's an inner loop that iterates through each element of the array.
+7. Within the inner loop, it checks if the i-th bit of the current element A[j] is set using bit manipulation (A[j] >> i & 1 checks if the i-th bit is set).
+8. If the i-th bit is set, it increments the count variable.
+9. After counting the set bits at the i-th position in all elements of the array, it checks if the count modulo 3 equals 1.
+10.If so, it sets the i-th bit of the ans variable using bitwise OR operation (ans = ans | (1 << i)), ensuring that the single number's bit at that position is retained in the result.
+11. After iterating through all 32 bit positions, the method returns the final ans, which represents the single number that appears only once.
+
+(1) : Time Complexity:
+
+The time complexity of this solution is O(n), where n is the number of elements in the input array A.
+This is because the code iterates through each element of the array once in the inner loop, and it iterates through each bit position (32 times) in the outer loop.
+Therefore, the time complexity is linear in terms of the input size.
+
+(2): Space Complexity:
+
+The space complexity of this solution is O(1), which means it uses constant extra space.
+Regardless of the size of the input array, the amount of extra space used by the algorithm remains constant.
+The only variables used are n (which stores the length of the array), ans (which stores the result), i (loop variable), and count (to count the set bits), all of which are single integers.
+There are no data structures or arrays that grow with the input size, so the space complexity remains constant.
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
