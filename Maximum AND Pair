@@ -1,0 +1,58 @@
+Daily Coding:  Maximum AND Pair
+
+Problem Description: Given an array A. For every pair of indices i and j (i != j), find the maximum A[i] & A[j].
+Note: Return the two numbers in ascending order.
+
+Solution : 
+
+public class Solution {
+
+    // Method to check if the ith bit of a number a is set or not
+    public boolean checkBit(int a, int i) {
+        // Right shift a by i positions and perform bitwise AND with 1
+        // If the result is 1, then ith bit is set, otherwise not
+        return ((a >> i) & 1) == 1;
+    }
+
+    // Main method to solve the problem
+    public int solve(int[] A) {
+        // Variable to store the result
+        int ans = 0;
+
+        // Iterate through each bit position from 30 to 0
+        for (int i = 30; i >= 0; i--) {
+            // Count the number of elements in A with the ith bit set
+            int count = 0;
+            for (int j = 0; j < A.length; j++) {
+                if (checkBit(A[j], i)) {
+                    count++;
+                }
+            }
+
+            // If count is greater than or equal to 2, set the ith bit in the answer
+            if (count >= 2) {
+                ans |= (1 << i); // Set the ith bit in ans using bitwise OR
+                // Set all elements in A with the ith bit unset to 0
+                for (int j = 0; j < A.length; j++) {
+                    if (!checkBit(A[j], i)) {
+                        A[j] = 0;
+                    }
+                }
+            }
+        }
+        return ans; // Return the final answer
+    }
+}
+
+
+Explanation:
+
+1- The checkBit method checks whether the ith bit of a number a is set or not using bitwise operations.
+2- In the solve method:
+> We iterate through each bit position from the 30th bit to the 0th bit.
+> For each bit position, we count the number of elements in array A that have that bit set.
+> If the count is greater than or equal to 2, we set the corresponding bit in the answer and set all elements in A with that bit unset to 0.
+> Finally, we return the computed answer.
+
+(1) Time Complexity: O(n * 31) = O(n) - We iterate through the array A once, and for each element, we iterate through 31 bits. Hence, the overall time complexity is O(n).
+(2) Space Complexity: O(1) - We use a constant amount of extra space for variables regardless of the size of the input array A.
