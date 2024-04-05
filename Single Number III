@@ -1,0 +1,83 @@
+Daily Coding: Single Number III
+
+Problem Description: Given an array of positive integers A, two integers appear only once, and all the other integers appear twice.
+Find the two integers that appear only once.
+
+Note: Return the two numbers in ascending order.
+
+Solution : 
+
+import java.util.Arrays;
+
+public class Solution {
+
+    // Method to check if the ith bit of a number A is set or not
+    public boolean checkBit(int A, int i) {
+        // Right shift A by i positions and perform bitwise AND with 1
+        // If the result is 1, then ith bit is set, otherwise not
+        return ((A >> i) & 1) == 1;
+    }
+
+    // Main method to solve the problem
+    public int[] solve(int[] A) {
+        // Initialize an array to store the result
+        int[] res = new int[2];
+        // Variable to hold the XOR of all elements in A
+        int val = 0;
+
+        // XOR all elements of A to find the XOR of the two non-repeating elements
+        for (int i = 0; i < A.length; i++) {
+            val ^= A[i];
+        }
+
+        // Find the rightmost set bit position in val
+        int pos = 0;
+        for (int i = 0; i <= 30; i++) {
+            if (checkBit(val, i)) {
+                pos = i;
+                break;
+            }
+        }
+
+        // Initialize variables to store the two non-repeating elements
+        int set = 0;
+        int unSet = 0;
+
+        // Partition the elements of A based on the pos-th bit
+        // XOR all elements with set bit at pos and those with unset bit at pos
+        for (int i = 0; i < A.length; i++) {
+            if (checkBit(A[i], pos)) {
+                set ^= A[i];
+            } else {
+                unSet ^= A[i];
+            }
+        }
+
+        // Store the smaller of the two non-repeating elements at res[0]
+        res[0] = Math.min(set, unSet);
+        // Store the larger of the two non-repeating elements at res[1]
+        res[1] = Math.max(set, unSet);
+
+        // Return the result array
+        return res;
+    }
+}
+
+Explanation:
+
+1-The checkBit method checks whether the ith bit of a number A is set or not using bitwise operations.
+
+2-In the solve method:
+> First, we XOR all elements of array A to find the XOR of the two non-repeating elements.
+> Next, we find the position of the rightmost set bit in the XOR result.
+> Then, we partition the elements of A based on this bit position and XOR the elements accordingly to find the two non-repeating elements.
+> Finally, we store the smaller and larger of these two elements in the result array and return it.
+
+(1) Time Complexity: O(n) - We iterate through the array A twice, and each iteration takes O(n) time. Hence, the overall time complexity is O(n).
+(2) Space Complexity: O(1) - We use a constant amount of extra space for variables regardless of the size of the input array A.
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
+
+
