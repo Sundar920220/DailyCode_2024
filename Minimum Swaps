@@ -1,0 +1,75 @@
+Daily Coding: Minimum Swaps
+
+Problem Description: Given an array of integers A and an integer B, find and return the minimum number of swaps required to bring all the numbers less than or equal to B together.
+
+Note: It is possible to swap any two elements, not necessarily consecutive.
+
+Solution : 
+
+
+public class Solution {
+    // Method to solve the problem
+    public int solve(int[] A, int B) {
+        // Length of the array A
+        int N = A.length;
+        // Variable to count elements less than or equal to B
+        int k = 0;
+        // Counting elements less than or equal to B
+        for(int i = 0; i < N; i++){
+            if(A[i] <= B){
+                k++;
+            }
+        }
+        // Variable to count bad elements initially
+        int bad = 0;
+        // Counting bad elements in the first window of size k
+        for(int i = 0; i < k; i++){
+            if(A[i] > B){
+                bad++;
+            }
+        }
+        // Initializing ans with the count of bad elements in the initial window
+        int ans = bad;
+        // Sliding window technique to find the minimum bad elements
+        int start = 1;
+        int end = k;
+        while(end < N){
+            // Removing the leftmost element from the window and updating bad if it's a bad element
+            if(A[start - 1] > B){
+                bad--;
+            }
+            // Adding the rightmost element to the window and updating bad if it's a bad element
+            if(A[end] > B){
+                bad++;
+            }
+            // Updating ans if the count of bad elements in the current window is less than ans
+            if(bad < ans){
+                ans = bad;
+            }
+            // Moving the window
+            start++;
+            end++;
+        }
+        // Returning the minimum count of bad elements
+        return ans;
+    }
+}
+
+Explanation:
+
+1- The method solve takes an array A and an integer B as input parameters and returns an integer.
+2- It initializes variables N to store the length of array A and k to count elements less than or equal to B.
+3- It counts elements less than or equal to B in the array.
+4- It initializes bad to count bad elements (greater than B) in the initial window of size k.
+5- It initializes ans with the count of bad elements in the initial window.
+6- It uses the sliding window technique to find the minimum count of bad elements.
+7- It moves a window of size k through the array and updates bad accordingly.
+8- It updates ans if the count of bad elements in the current window is less than ans.
+9- Finally, it returns the minimum count of bad elements.
+
+(1) Time Complexity: O(N), where N is the length of array A.
+(2) Space Complexity: O(1), as it uses only a constant amount of extra space regardless of the size of the input.
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
