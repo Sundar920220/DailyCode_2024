@@ -1,0 +1,54 @@
+Daily Coding: Subarray with given sum and length
+
+Problem Description: Given an array A of length N. Also given are integers B and C.
+
+Return 1 if there exists a subarray with length B having sum C and 0 otherwise
+
+
+Solution : 
+
+public class Solution {
+    // Method to solve the problem
+    public int solve(int[] A, int B, int C) {
+        // Length of the array A
+        int N = A.length;
+        // Variable to store the sum of the first B elements
+        int sum = 0;
+        // Calculating the sum of the first B elements
+        for(int i = 0; i < B; i++){
+            sum += A[i];
+        }
+        // If the sum of first B elements is equal to C, return 1
+        if(sum == C) return 1;
+        
+        // Sliding window technique to check subsequent subarrays
+        int start = 1, end = B;
+        while(end < N){
+            // Update the sum by removing the first element of the previous window
+            // and adding the next element after the window
+            sum = sum - A[start - 1] + A[end];
+            // Move the window by increasing start and end indices
+            start++;
+            end++;
+            // If the sum of the current window is equal to C, return 1
+            if(sum == C) return 1;
+        }
+        // If no subarray with sum equal to C is found, return 0
+        return 0;
+    }
+}
+
+
+Explanation:
+
+1-  The method solve takes an array A, an integer B, and an integer C as input parameters and returns an integer.
+2-  Iniitializes variables N to store the length of array A and sum to store the sum of the first B elements of array A.
+3-  It calculates the initial sum of the first B elements of array A.
+4- Check if the initial sum equals C. If yes, return 1.
+5-  Uses the sliding window technique to check subsequent subarrays. It moves a window of size B through the array and calculates the sum of elements in each window.
+6-  If the sum of the current window equals C, returns 1.
+7-  If no subarray with a sum equal to C is found, returns 0.
+
+
+(1) Time Complexity: O(N), where N is the length of array A.
+(2) Space Complexity: O(1), as it uses only a constant amount of extra space regardless of the size of the input.
