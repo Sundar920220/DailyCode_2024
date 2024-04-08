@@ -1,0 +1,53 @@
+Daily Coding: Range Sum Query
+
+Problem Description: You are given an integer array A of length N. You are also given a 2D integer array B with dimensions M x 2, where each row denotes a [L, R] query.
+For each query, you have to find the sum of all elements from L to R indices in A (0 - indexed).
+
+More formally, find A[L] + A[L + 1] + A[L + 2] +... + A[R - 1] + A[R] for each query.
+
+
+Solution : 
+
+public class Solution {
+    // Method to calculate range sum for given array A and queries B
+    public long[] rangeSum(int[] A, int[][] B) {
+        // Initialize array to store prefix sum
+        long[] prefixSum = new long[A.length];
+        // Initialize output array to store results
+        long[] outputArray = new long[B.length];
+        
+        // Calculate prefix sum
+        prefixSum[0] = A[0];
+        for (int i = 1; i < A.length; i++) {
+            prefixSum[i] = prefixSum[i - 1] + A[i];
+        }
+        
+        // Calculate range sum for each query in B
+        for (int i = 0; i < B.length; i++) {
+            int L = B[i][0];
+            int R = B[i][1];
+            if (L == 0) {
+                outputArray[i] = prefixSum[R];
+            } else {
+                outputArray[i] = prefixSum[R] - prefixSum[L - 1];
+            }
+        }
+        // Return the output array
+        return outputArray;
+    }
+}
+
+Description: The rangeSum method calculates the sum of elements within given ranges for an input array A based on the queries provided in a 2D array B. It utilizes prefix sum technique to efficiently calculate range sums.
+
+Time Complexity:
+
+Calculating prefix sum: O(n), where n is the number of elements in array A.
+Processing queries: O(m), where m is the number of queries in array B.
+Overall time complexity: O(n + m).
+
+Space Complexity:
+
+Storing prefix sum: O(n), where n is the number of elements in array A.
+Storing output array: O(m), where m is the number of queries in array B.
+Overall space complexity: O(n + m).
+
