@@ -1,0 +1,67 @@
+Daily Coding:  Even numbers in a range
+
+Problem Description: You are given an array A of length N and Q queries given by the 2D array B of size Q×2.
+
+Each query consists of two integers B[i][0] and B[i][1].
+
+For every query, your task is to find the count of even numbers in the range from A[B[i][0]] to A[B[i][1]].  
+
+
+Solution : 
+
+public class Solution {
+    // Method to count even elements in given ranges of an array
+    public int[] solve(int[] A, int[][] B) {
+        int n = A.length;
+        int q = B.length;
+        // Array to store results
+        int res[] = new int[q];
+        // Array to store prefix sum of even elements
+        int pfSum[] = new int[n];
+        // Initialize prefix sum based on first element of A
+        if (A[0] % 2 == 0) {
+            pfSum[0] = 1;
+        } else {
+            pfSum[0] = 0;
+        }
+        // Calculate prefix sum of even elements
+        for (int i = 1; i < n; i++) {
+            if (A[i] % 2 == 0) {
+                pfSum[i] = pfSum[i - 1] + 1;
+            } else {
+                pfSum[i] = pfSum[i - 1];
+            }
+        }
+        // Process queries to find even element counts within given ranges
+        for (int j = 0; j < q; j++) {
+            int L = B[j][0];
+            int R = B[j][1];
+            if (L == 0) {
+                res[j] = pfSum[R];
+            } else {
+                res[j] = pfSum[R] - pfSum[L - 1];
+            }
+        }
+        // Return the results
+        return res;
+    }
+}
+
+Description: The solve method counts the number of even elements within specified ranges of the input array A based on the queries provided in 2D array B. 
+It utilizes prefix sum technique to efficiently count even elements.
+
+Time Complexity:
+
+Calculating prefix sum: O(n), where n is the number of elements in array A.
+Processing queries: O(q), where q is the number of queries in array B.
+Overall time complexity: O(n + q).
+Space Complexity:
+
+Storing prefix sum: O(n), where n is the number of elements in array A.
+Storing output array: O(q), where q is the number of queries in array B.
+Overall space complexity: O(n + q).
+
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
