@@ -1,0 +1,50 @@
+Daily Coding: Equilibrium index of an array
+
+Problem Description: You are given an array A of integers of size N. Your task is to find the equilibrium index of the given array.The equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes.
+
+If there are no elements that are at lower indexes or at higher indexes, then the corresponding sum of elements is considered as 0.
+
+Note:
+Array indexing starts from 0.
+If there is no equilibrium index then return -1.
+If there are more than one equilibrium indexes then return the minimum index.
+
+Solution : 
+public class Solution {
+    // Method to find the equilibrium index of an array
+    public int solve(int[] A) {
+        int n = A.length;
+        // Array to store prefix sum
+        int prefixSum[] = new int[n];
+        // Calculate prefix sum
+        prefixSum[0] = A[0];
+        for (int i = 1; i < n; i++) {
+            prefixSum[i] = prefixSum[i - 1] + A[i];
+        }
+        int leftSum = 0;
+        int rightSum = 0;
+        // Iterate through array to find equilibrium index
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                leftSum = 0;
+            } else {
+                leftSum = prefixSum[i - 1];
+            }
+            rightSum = prefixSum[n - 1] - prefixSum[i];
+            // Check if left and right sums are equal
+            if (leftSum == rightSum)
+                return i; // Equilibrium index found
+        }
+        return -1; // Equilibrium index not found
+    }
+}
+
+Description: The solve method finds the equilibrium index of an array, where the sum of elements to the left of the index equals the sum of elements to the right.
+
+Time Complexity:
+
+Calculating prefix sum: O(n), where n is the number of elements in array A.Finding equilibrium index: O(n), as it iterates through the array once.Overall time complexity: O(n).
+
+Space Complexity:
+
+Storing prefix sum: O(n), where n is the number of elements in array A.Overall space complexity: O(n).
