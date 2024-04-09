@@ -1,0 +1,79 @@
+Daily Coding: Spiral Order Matrix II
+ 
+Problem Description: Given an integer A, generate a square matrix filled with elements from 1 to A2 in spiral order and return the generated square matrix.
+
+
+Solution : 
+
+public class Solution {
+    public int[][] generateMatrix(int A) {
+        // Initialize a 2D array to store the spiral matrix
+        int spiralMatrix[][] = new int[A][A];
+        
+        // Initialize the element counter to 1
+        int element = 1;
+        
+        // Initialize variables to track current position in the matrix
+        int i = 0; // row index
+        int j = 0; // column index
+        
+        // Loop until the size of the matrix reduces to 1x1
+        while (A > 1) {
+            // Fill the top row from left to right
+            for (int k = 1; k <= A - 1; k++) {
+                spiralMatrix[i][j] = element++;
+                j++; 
+            }
+            // Fill the rightmost column from top to bottom
+            for (int k = 1; k <= A - 1; k++) {
+                spiralMatrix[i][j] = element++;
+                i++;
+            }
+            // Fill the bottom row from right to left
+            for (int k = 1; k <= A - 1; k++) {
+                spiralMatrix[i][j] = element++;
+                j--;
+            }
+            // Fill the leftmost column from bottom to top
+            for (int k = 1; k <= A - 1; k++) {
+                spiralMatrix[i][j] = element++;
+                i--;
+            }
+            // Move to the next inner loop by adjusting indices and reducing matrix size
+            i++;
+            j++;
+            A = A - 2;
+        }
+        // If the matrix reduces to 1x1, fill the last remaining element
+        if (A == 1) {
+            spiralMatrix[i][j] = element;
+        }
+        // Return the generated spiral matrix
+        return spiralMatrix;
+    }
+}
+
+Explanation:
+
+(1) The function generateMatrix takes an integer A as input and returns a 2D array representing a spiral matrix of size A x A.
+
+(2) Inside the function, a 2D array spiralMatrix of size A x A is initialized to store the spiral matrix.
+
+(3) The variable element is initialized to 1, which represents the value to be filled in the matrix.
+
+(4) Variables i and j are initialized to track the current position in the matrix, starting from (0, 0).
+
+(5) The while loop continues until the size of the matrix reduces to 1x1. In each iteration of the loop, it fills the outer layer of the matrix with values, moving clockwise from top-left.
+
+(6) Four for loops are used to fill each side of the matrix: top row, rightmost column, bottom row, and leftmost column.
+
+(7) After filling each side, the loop adjusts the indices and reduces the size of the matrix by 2 to move to the next inner loop.
+
+(8) If the size of the matrix reduces to 1x1, the last remaining element is filled.
+
+>> Time Complexity: O(n^2) - where n is the input A. This is because we have to fill each cell of the A x A matrix.
+
+>> Space Complexity: O(n^2) - The space complexity is also O(n^2) because we are storing the entire A x A matrix.
+
+
+
