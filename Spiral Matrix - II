@@ -1,6 +1,6 @@
 Daily Coding: Spiral Order Matrix II
  
-Problem Description: Given an integer A, generate a square matrix filled with elements from 1 to A2 in spiral order and return the generated square matrix.
+Problem Description: Given an integer A, generate a square matrix filled with elements from 1 to A^2 in spiral order and return the generated square matrix.
 
 
 Solution : 
