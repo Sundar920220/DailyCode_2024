@@ -1,0 +1,88 @@
+Daily Coding: Length of longest consecutive ones 
+
+Problem Description: Given a binary string A. It is allowed to do at most one swap between any 0 and 1. Find and return the length of the longest consecutive 1’s that can be achieved.
+
+Solution : 
+
+public class Solution {
+    // Method to solve the problem
+    public int solve(String A) {
+        // Convert the input string to a character array
+        char[] arr = A.toCharArray();
+        // Length of the input string
+        int n = A.length();
+        // Count the number of '1's in the input string
+        int count = 0;
+        // Initialize the maximum consecutive '1's count
+        int ans = 0;
+        
+        // Count the number of '1's in the string
+        for (int i = 0; i < n; i++) {
+            if (A.charAt(i) == '1') {
+                count++;
+            }
+        }
+        
+        // If the number of '1's is equal to the length of the string, return the length
+        if (count == n) {
+            return n;
+        }
+        
+        // Iterate through the string to find the maximum consecutive '1's
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = 0;
+            // If the current character is '0', calculate the number of consecutive '1's on its left and right sides
+            if (A.charAt(i) == '0') {
+                // Calculate consecutive '1's on the left side of the '0'
+                for (int j = i - 1; j >= 0; j--) {
+                    if (A.charAt(j) == '1') {
+                        left++;
+                    } else {
+                        break;
+                    }
+                }
+                // Calculate consecutive '1's on the right side of the '0'
+                for (int j = i + 1; j < n; j++) {
+                    if (A.charAt(j) == '1') {
+                        right++;
+                    } else {
+                        break;
+                    }
+                }
+                // Calculate the total consecutive '1's including the current '0'
+                int total = (count == left + right) ? left + right : left + right + 1;
+                // Update the maximum consecutive '1's count
+                if (total > ans) {
+                    ans = total;
+                }
+            }
+        }
+        // Return the maximum consecutive '1's count
+        return ans;
+    }
+}
+
+Explanation:
+
+(1) The solve method takes a string A as input and returns an integer representing the maximum consecutive '1's after flipping at most one '0' to '1'.
+
+(2) It converts the input string into a character array arr and gets the length of the string n.
+
+(3) It initializes variables count to count the total number of '1's in the string and ans to store the maximum consecutive '1's count.
+
+(4) It then counts the number of '1's in the string.
+
+(5) If all characters in the string are '1's, it returns the length of the string.
+
+(6) Otherwise, it iterates through the string and finds the maximum consecutive '1's by considering each '0' as a potential flip.
+
+(7) For each '0', it calculates the consecutive '1's on its left and right sides.
+
+(8) It then calculates the total consecutive '1's including the current '0'.
+
+(9) Finally, it updates the maximum consecutive '1's count if necessary.
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
+
