@@ -1,0 +1,79 @@
+Daily Coding: Sum of Odd indices
+
+Problem Description:  Problem Description
+You are given an array A of length N and Q queries given by the 2D array B of size Q*2. Each query consists of two integers B[i][0] and B[i][1].
+For every query, the task is to calculate the sum of all odd indices in the range A[B[i][0]…B[i][1]].
+
+Note : Use 0-based indexing
+
+
+Solution : 
+
+public class Solution {
+    // Method to solve the problem
+    public int[] solve(int[] A, int[][] B) {
+        int N = A.length; // Length of the input array A
+        
+        // Prefix sum array for odd-indexed elements
+        int[] pfOdd = new int[N];
+        pfOdd[0] = 0; // Initialize first element as 0
+        
+        // Calculate prefix sum of odd-indexed elements
+        for (int i = 1; i < N; i++) {
+            if (i % 2 != 0) {
+                // Add current odd-indexed element to prefix sum
+                pfOdd[i] = pfOdd[i - 1] + A[i];
+            } else {
+                // Carry forward the previous sum for even indices
+                pfOdd[i] = pfOdd[i - 1];
+            }
+        }
+        
+        // Array to store the results for each query
+        int m = B.length; // Length of queries array B
+        int[] ans = new int[m];
+        
+        // Process each query
+        for (int i = 0; i < m; i++) {
+            int left = B[i][0]; // Left index of the range
+            int right = B[i][1]; // Right index of the range
+            
+            // Calculate the sum of odd-indexed elements in the range
+            if (left == 0) {
+                ans[i] = pfOdd[right];
+            } else {
+                ans[i] = pfOdd[right] - pfOdd[left - 1];
+            }
+        }
+        
+        // Return the results array
+        return ans;
+    }
+}
+
+Explanation Steps:
+
+Prefix Sum Array for Odd-Indexed Elements:
+
+First, the code initializes an array pfOdd to store prefix sums of odd-indexed elements from the input array A.
+The array pfOdd is calculated by iterating through A and summing up odd-indexed elements (1, 3, 5, ...). If the current index i is odd, it adds the value of A[i] to pfOdd[i]. Otherwise, it copies the value from the previous index.
+
+Processing Queries:
+
+The method iterates through the queries in B.
+For each query, it calculates the sum of odd-indexed elements from the range [left, right] using the prefix sum array pfOdd.
+If the left index of the query is 0, the method directly uses the prefix sum at the right index. Otherwise, it calculates the sum as the difference between the prefix sum at the right index and the prefix sum at the index left - 1.
+Return Results:
+
+The method returns the calculated sums for each query as an array of integers.
+
+Time and Space Complexity:
+
+Time Complexity: O(N + m).
+
+Space Complexity: O(N + m).
+
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
