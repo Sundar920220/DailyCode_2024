@@ -1,0 +1,82 @@
+Daily Coding: Sum of even indices
+
+Problem Description: You are given an array A of length N and Q queries given by the 2D array B of size Q*2. Each query consists of two integers B[i][0] and B[i][1].
+For every query, the task is to calculate the sum of all even indices in the range A[B[i][0]…B[i][1]].
+
+Solution : 
+
+public class Solution {
+    // Method to solve the problem
+    public int[] solve(int[] A, int[][] B) {
+        int n = A.length; // Length of the input array A
+        // Prefix sum array for even-indexed elements
+        int[] pfEven = new int[n];
+        pfEven[0] = A[0]; // Initialize first element
+        
+        // Calculate prefix sum of even-indexed elements
+        for (int i = 1; i < n; i++) {
+            if (i % 2 == 0) {
+                // Add current even-indexed element to prefix sum
+                pfEven[i] = pfEven[i - 1] + A[i];
+            } else {
+                // Carry forward the previous sum for odd indices
+                pfEven[i] = pfEven[i - 1];
+            }
+        }
+        
+        // Array to store the results for each query
+        int[] ans = new int[B.length];
+        
+        // Process each query
+        for (int i = 0; i < B.length; i++) {
+            int left = B[i][0]; // Left index of the range
+            int right = B[i][1]; // Right index of the range
+            
+            // Calculate the sum of even-indexed elements in the range
+            if (left == 0) {
+                ans[i] = pfEven[right];
+            } else {
+                ans[i] = pfEven[right] - pfEven[left - 1];
+            }
+        }
+        
+        // Return the results array
+        return ans;
+    }
+}
+
+Explanation Steps:
+
+Prefix Sum Array for Even-Indexed Elements:
+
+First, the code initializes an array pfEven to store prefix sums of even-indexed elements from the input array A.
+The array pfEven is calculated by iterating through A and summing up even-indexed elements (0, 2, 4, ...). If the current index i is even, it adds the value of A[i] to pfEven[i]. Otherwise, it copies the value from the previous index.
+
+Processing Queries:
+
+The method iterates through the queries in B.
+For each query, it calculates the sum of even-indexed elements from the range [left, right] using the prefix sum array pfEven.
+If the left index of the query is 0, the method directly uses the prefix sum at the right index. Otherwise, it calculates the sum as the difference between the prefix sum at the right index and the prefix sum at the index left - 1.
+Return Results:
+
+The method returns the calculated sums for each query as an array of integers.
+
+Time and Space Complexity:
+
+Time Complexity:
+
+Calculating the prefix sum array (pfEven) takes O(n) time where n is the length of the input array A.
+Processing each query involves a constant-time operation since it only uses the prefix sum array to compute the sum. Therefore, the time complexity for processing all queries is O(m), where m is the number of queries.
+Overall time complexity is O(n + m), which is efficient.
+
+Space Complexity:
+
+The space complexity is dominated by the prefix sum array (pfEven) and the array of results (ans).
+pfEven requires O(n) space.
+ans requires O(m) space.
+Therefore, the total space complexity is O(n + m).
+
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
