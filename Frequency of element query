@@ -1,0 +1,56 @@
+Daily Coding:  Frequency of element query
+
+Problem Description: Given an array A. You have some integers given in the array B. For the i-th number, find the frequency of B[i] in the array A and return a list containing all the frequencies.
+
+Solution : 
+
+public class Solution {
+    public int[] solve(int[] A, int[] B) {
+        // Create a HashMap to store the frequency of elements in array A
+        HashMap<Integer, Integer> hM = new HashMap<>();
+        
+        // Iterate through array A to populate the HashMap with element frequencies
+        for (int i = 0; i < A.length; i++) {
+            if (hM.containsKey(A[i])) {
+                // If the element is already present in the HashMap, increment its frequency
+                hM.put(A[i], hM.get(A[i]) + 1);
+            } else {
+                // If the element is not present, add it to the HashMap with frequency 1
+                hM.put(A[i], 1);
+            }
+        }
+        
+        // Create an array to store the answers for each element in array B
+        int[] ans = new int[B.length];
+        
+        // Iterate through array B
+        for (int i = 0; i < B.length; i++) {
+            if (hM.containsKey(B[i])) {
+                // If the element in B is present in the HashMap, store its frequency in the answer array
+                ans[i] = hM.get(B[i]);
+            } else {
+                // If the element in B is not present in the HashMap, set its frequency to 0 in the answer array
+                ans[i] = 0;
+            }
+        }
+        
+        // Return the answer array
+        return ans;
+    }
+}
+
+
+Explanation : 
+
+(1) The code defines a class named Solution with a method solve that takes two integer arrays A and B as input and returns an integer array.
+(2) Inside the solve method:A HashMap hM is created to store the frequency of elements in array A. The key represents the element, and the value represents its frequency.
+(3) The first loop iterates through array A to populate the HashMap hM with the frequency of each element.
+(4) The second loop iterates through array B:
+(5) If an element in B is found in the HashMap hM, its frequency is stored in the answer array ans.
+(6) If an element in B is not found in the HashMap hM, its frequency in the answer array ans is set to 0.
+(7) The answer array ans is returned.
+
+
+Time Complexity: The time complexity of this solution is O(n + m), where n is the length of array A and m is the length of array B. This is because we iterate through both arrays once.
+
+Space Complexity: The space complexity is O(n), where n is the number of unique elements in array A. This is because we use a HashMap to store the frequency of elements in array A. The space required for the answer array ans is O(m), where m is the length of array B.
