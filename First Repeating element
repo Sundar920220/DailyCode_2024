@@ -1,0 +1,57 @@
+Daily Coding:  First Repeating element
+
+Problem Description: Given an integer array A of size N, find the first repeating element in it. We need to find the element that occurs more than once and whose index of the first occurrence is the smallest. If there is no repeating element, return -1.
+
+Solution : 
+
+public class Solution {
+    public int solve(int[] A) {
+        // Create a HashMap to store the frequency of elements in array A
+        HashMap<Integer, Integer> hM = new HashMap<>();
+        
+        // Iterate through array A to populate the HashMap with element frequencies
+        for (int i = 0; i < A.length; i++) {
+            if (hM.containsKey(A[i])) {
+                // If the element is already present in the HashMap, increment its frequency
+                hM.put(A[i], hM.get(A[i]) + 1);
+            } else {
+                // If the element is not present, add it to the HashMap with frequency 1
+                hM.put(A[i], 1);
+            }
+        }
+        
+        // Iterate through array A again to find the first element with frequency greater than 1
+        for (int i = 0; i < A.length; i++) {
+            if (hM.get(A[i]) > 1) {
+                // If an element has frequency greater than 1, return it
+                return A[i];
+            }
+        }
+        
+        // If no element has frequency greater than 1, return -1
+        return -1;
+    }
+}
+
+
+Explanation : 
+
+Explanation:
+
+(1) The code defines a class named Solution with a method solve that takes an integer array A as input and returns an integer.
+(2) Inside the solve method:
+(3) A HashMap hM is created to store the frequency of elements in array A. The key represents the element, and the value represents its frequency.
+(4) The first loop iterates through array A to populate the HashMap hM with the frequency of each element.
+(5) The second loop iterates through array A again to find the first element with frequency greater than 1 in the HashMap hM.
+(6) If such an element is found, it is returned.
+(7) If no element with frequency greater than 1 is found, -1 is returned.
+(8) The return value is either the first element with frequency greater than 1 or -1 if no such element exists.
+
+Time Complexity:The time complexity of this solution is O(n), where n is the length of array A. This is because we iterate through array A twice, once to populate the HashMap and once to find the first element with frequency greater than 1.
+
+Space Complexity:The space complexity is O(n), where n is the number of unique elements in array A. This is because we use a HashMap to store the frequency of elements in array A.
+
+
+#Coding #Programming #Algorithm #JavaProgramming #SoftwareEngineering #TechCommunity #DeveloperLife #CodeSnippet
+#ProblemSolving #ComputerScience #TechTalk #CodeReview
+#DataStructures #AlgorithmDesign #LinkedInCode
